@@ -1,0 +1,18 @@
+<html>
+  <body>
+    
+    <%- include('header', {name: name}); %>
+
+    <ul>
+      <% books.forEach(function(book){ %>
+          <li> <%= book %> </li>
+      <% })%>
+    </ul>
+
+    <% if(name === "code") {  %>
+    <h4> <%= dob %>  code</h4>
+    <% } else{ %>
+      <p>asdjasdj</p>
+      <% }%>
+  </body>
+</html>
