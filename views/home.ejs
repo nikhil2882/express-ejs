@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta ch arset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/home.css"/>
   <title>Document</title>
 </head>
 <body>
+  
+  <%- include("partials/header", { username: name }) %>
 
-  <%- include("header", { username: name }) %>
-
-  <h4>and here are the fav books of  <%= name %> </h4>
+  <% if(name === "cq") { %>
+    <h1>welcome to cq</h1>
+  <% } else { %>
+    <h1> <%= name %> you are not welcome here</h1>
+  <% } %>
 
   <ul>
     <% books.forEach(function(book){ %>
         <li> <%= book %> </li>
     <% }) %>
   </ul>
-
 </body>
 </html>

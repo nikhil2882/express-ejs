@@ -1,36 +1,35 @@
 const express = require('express')
+const session = require("express-session");
 const app = express()
 const port = 3000
 
-var session = require('express-session');
+console.log(process.env.DB_CONFIG)
 
-app.use(express.static("public"))
+app.use(express.static("public"));
 
-app.set('view engine', 'ejs');
-//app.set('views', __dirname+"/abc");
+app.use(express.urlencoded({ extended: true }));
+
+app.set("view engine", "ejs");
+//app.set("views", __dirname+"/abc")
 
 app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
+  secret:"random words"
 }))
 
-app.use(express.urlencoded({ extended:true }));
-
-app.get('/', (req, res) => 
+app.get("/", function(req, res) 
 {
-  const { username } = req.session;
-
-  if(!username)
+  if(!req.session.username)
   {
     res.redirect("/login");
     return
   }
 
-  res.render("home", { name: username, books: ["jungle book", "harry potter", "0 to 1" , "the secret"] });
+  let books = [ "the jungle book", "harry potter", "abcd" , "xyz"];
+
+  res.render("home", { name: req.session.username, books: books });
 })
-
-
 
 app.get("/login", function(req, res)
 {
@@ -39,12 +38,11 @@ app.get("/login", function(req, res)
 
 app.post("/login", function(req, res)
 {
-  const { username } = req.body;
-  //const username = req.body.username;
+  console.log(req.body);
 
-  req.session.username = username;
+  req.session.username = req.body.username;
 
-  res.redirect("/")
+  res.redirect("/");
 })
 
 app.listen(port, () => {
