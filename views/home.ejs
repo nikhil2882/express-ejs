@@ -1,18 +1,23 @@
-<html>
-  <body>
-    
-    <%- include('header', {name: name}); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/home.css"/>
+  <title>Document</title>
+</head>
+<body>
 
-    <ul>
-      <% books.forEach(function(book){ %>
-          <li> <%= book %> </li>
-      <% })%>
-    </ul>
+  <%- include("header", { username: name }) %>
 
-    <% if(name === "code") {  %>
-    <h4> <%= dob %>  code</h4>
-    <% } else{ %>
-      <p>asdjasdj</p>
-      <% }%>
-  </body>
+  <h4>and here are the fav books of  <%= name %> </h4>
+
+  <ul>
+    <% books.forEach(function(book){ %>
+        <li> <%= book %> </li>
+    <% }) %>
+  </ul>
+
+</body>
 </html>
